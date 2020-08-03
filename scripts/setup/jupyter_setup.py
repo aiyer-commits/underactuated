@@ -1,3 +1,4 @@
+import distro
 import sys
 import platform
 from IPython import get_ipython
@@ -43,6 +44,7 @@ def setup_underactuated():
     try:
         import underactuated
     except ImportError:
+        distroTuple = distro.linux_distribution()
         if platform.system() == "Darwin":
             get_ipython().system(
                 u"if [ ! -d '/opt/underactuated' ]; then git clone https://github.com/RussTedrake/underactuated.git /opt/underactuated && /opt/underactuated/scripts/setup/mac/install_prereqs; fi"  # noqa
